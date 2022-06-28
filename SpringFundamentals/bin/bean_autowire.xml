@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+         
+         <context:annotation-config /> <!-- to activate annotations eg. to use @anutowired and to call desired constructor -->
+         <context:property-placeholder location="classpath:app.properties"/> <!-- to locate properties file and to dynamically load the property value -->
+         
+         
+<bean id="humanHeart" class="com.accolite.spring.Heart" />    
+<bean id="octopusHeart" class="com.accolite.spring.Heart" />     
+
+<bean id="human" class="com.accolite.spring.Human"> <!-- autowire="constructor" -->
+	<property name="id" value="${human.id}"></property> <!-- sets through setter -->
+</bean>
+
+</beans>
+
+
+<!-- 1.byType (fails when 2 objects of same class created) -> 2.byName -->
+<!-- <bean id="humanHeart" class="com.accolite.spring.Heart" />    
+<bean id="octopusHeart" class="com.accolite.spring.Heart" /> -->
+
+<!-- autowire="byName" .. should match heart with class property object using setter method-->
+<!-- autowire="byType" when class name and bean class name matches ,//when id of bean does not match the property object in the class -->
+<!-- autowire="constructor"  injects using constructor of the class -->
